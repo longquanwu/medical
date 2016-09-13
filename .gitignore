@@ -6,3 +6,5 @@
 !*/cache/.htaccess
 .idea/
 ./application/logs/
+./application/config/database.php
+./application/config/config.php
