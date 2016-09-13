@@ -4,4 +4,5 @@
 */cache/*
 !*/cache/index.html
 !*/cache/.htaccess
-./idea
+.idea/
+./application/logs/
