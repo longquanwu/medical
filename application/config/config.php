@@ -542,8 +542,8 @@ $config['redis'] = [
     'host' => '127.0.0.1',
     'port' => '6379',
     'timeout' => '0.0',
-    'auth' => 'qwerdfb',
-    'prefix' => 'guzzle',
+    'auth' => 'w314314',
+    'prefix' => 'medical',
 ];
 
 
