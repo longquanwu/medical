@@ -6,7 +6,7 @@
  * Date: 16/9/12 Time: 13:55
  */
 
-$uploadPath = '/data/wwwroot/upload/' . date('Y-m') . '/' . date('d') . '/';
+$uploadPath = '/data/www/uploads/' . date('Y-m') . '/' . date('d') . '/';
 
 if (!is_dir($uploadPath)){
     mkdir($uploadPath, 0777, TRUE);
