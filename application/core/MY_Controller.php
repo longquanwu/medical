@@ -81,10 +81,31 @@ abstract class ADMIN_Controller extends CI_Controller{
     
     /** @var  Logger */
     public $logger;
+
+    /** @var  CI_Session */
+    public $session;
     
-    public function __construct(){
+    public function __construct($check = true){
         parent::__construct();
         $this->load->library('Logger', ['dir' => 'admin']);
+        $this->load->library('session');
+        $check && $this->checkLogin();
+    }
+    
+    /**
+     * 控制器跳转
+     * @param $url
+     */
+    protected function redirect($url){
+        header('location:' . $url);
+        exit;
+    }
+
+    /**
+     * 检查是否登录
+     */
+    private function checkLogin(){
+        empty($this->session->user) && $this->redirect('/admin/Login');
     }
 
 }
