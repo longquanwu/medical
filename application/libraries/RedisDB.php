@@ -25,7 +25,7 @@ class RedisDB{
     
     /**
      * 单例连接Redis,连接成功返回实例,失败返回False
-     * @return RedisCache 类的实例|False
+     * @return RedisDB 类的实例|False
      */
     public static function getInstance(){
         if (self::$_instance === null){

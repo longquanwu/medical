@@ -520,7 +520,7 @@ $config['proxy_ips'] = '';
  * SeasLog配置
  */
 $config['seasLog'] = [
-    'basePath' => '/data/wwwlogs/guzzle',  //日志目录
+    'basePath' => '/data/logs/medical',  //日志目录
     'logger' => 'default'  //日志文件夹
 ];
 
