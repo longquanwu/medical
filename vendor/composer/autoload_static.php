@@ -6,6 +6,20 @@ namespace Composer\Autoload;
 
 class ComposerStaticInita7599a24f91f29516fa9fc071ec57e9a
 {
+    public static $prefixLengthsPsr4 = array (
+        'k' => 
+        array (
+            'kartik\\plugins\\fileinput\\' => 25,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'kartik\\plugins\\fileinput\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/bootstrap-fileinput',
+        ),
+    );
+
     public static $prefixesPsr0 = array (
         'o' => 
         array (
@@ -30,6 +44,8 @@ class ComposerStaticInita7599a24f91f29516fa9fc071ec57e9a
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInita7599a24f91f29516fa9fc071ec57e9a::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInita7599a24f91f29516fa9fc071ec57e9a::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInita7599a24f91f29516fa9fc071ec57e9a::$prefixesPsr0;
             $loader->classMap = ComposerStaticInita7599a24f91f29516fa9fc071ec57e9a::$classMap;
 

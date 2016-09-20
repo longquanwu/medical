@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>蘑菇后台</title>
+
+    <link href="/public/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/public/js/jquery.min.js"></script>
+    <script src="/public/dist/js/bootstrap.min.js"></script>
+    <script src="/public/js/docs.min.js"></script>
+
+    <link href="/public/css/admin/dashboard.css" rel="stylesheet">
+    <script src="/public/js/ie-emulation-modes-warning.js"></script>
+
+    <!--编辑器-->
+    <link href="/public/summernote/summernote.css" rel="stylesheet">
+    <script src="/public/summernote/summernote.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                lang: 'zh-CN',
+                height: 300,
+                callbacks: {
+                    onImageUpload: function (files) {
+                        sendFile(files[0]);
+                    }
+                }
+            });
+            function sendFile(file) {
+                data = new FormData();
+                data.append("file_data", file);
+                $.ajax({
+                    data: data,
+                    type: "POST",
+                    url: "/admin/upload/index/false",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(res) {
+                        var res = JSON.parse(res);
+                        $('#summernote').summernote('insertImage', res.msg, function ($image) {
+                            $image.attr('width', 1024);
+                            $image.attr('height', $image.height()/($image.width() / 1024));
+                        });
+                    }
+                });
+            }
+
+            var oFileInput = new FileInput();
+            oFileInput.Init("img", "/admin/upload", "img-thumbnail");
+        });
+    </script>
+
+    <!--图片上传-->
+    <link href="/public/kartik-v/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="/public/kartik-v/js/plugins/canvas-to-blob.min.js" type="text/javascript"></script>
+    <script src="/public/kartik-v/js/plugins/sortable.min.js" type="text/javascript"></script>
+    <script src="/public/kartik-v/js/plugins/purify.min.js" type="text/javascript"></script>
+    <script src="/public/kartik-v/js/fileinput.min.js"></script>
+    <script src="/public/kartik-v/themes/fa/theme.js"></script>
+    <script src="/public/kartik-v/js/locales/zh.js"></script>
+    <script src="/public/js/upload.js"></script>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">蘑菇</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">首页</a></li>
+                <li><a href="/admin/user/modify">修改密码</a></li>
+                <li><a href="/admin/user/logout">退出</a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="/admin/news/index">资讯</a></li>
+                <li><a href="/admin/load/index">引导图</a></li>
+                <li><a href="/admin/banner/index">Banner</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="">病情百科</a></li>
+                <li><a href="">药物百科</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="">普通社区</a></li>
+                <li><a href="">帖子分类</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="">心灵社区</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="">Android</a></li>
+                <li><a href="">IOS</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header"><?php if(isset($newInfo['id'])){echo "修改资讯 ID:{$newInfo['id']}";}else{echo "添加资讯";} ?></h1>
+            <form method="post" action="/admin/news/save">
+
+                <div class="form-group">
+                    <label for="title">新闻标题</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="新闻标题" <?php if(isset($newInfo['title'])){echo "value='{$newInfo['title']}'";} ?> required>
+                </div>
+                <div class="form-group">
+                    <label for="order">排序值</label>
+                    <input type="text" class="form-control" id="order" name="order" placeholder="排序值" <?php if(isset($newInfo['order'])){echo "value='{$newInfo['order']}'";} ?> required>
+                </div>
+                <div class="form-group">
+                    <label for="img">封面图片</label></br>
+                    <img src="<?php if(isset($newInfo['title'])){echo $newInfo['img'];} ?>" width="140" height="140" class="img-thumbnail">
+                    <input id="img" type="file" class="file" data-preview-file-type="text">
+                </div>
+                <div class="form-group">
+                    <label for="img">新闻内容</label>
+                    <textarea id="summernote" name="content" required><?php if(isset($newInfo['content'])){echo $newInfo['content'];} ?></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" name="img" id="img-thumbnail" <?php if(isset($newInfo['img'])){echo "value='{$newInfo['img']}'";} ?>>
+                    <?php if(isset($newInfo['id'])){ ?>
+                    <input type="hidden" name="id" value="<?php echo $newInfo['id']; ?>">
+                    <?php } ?>
+                    <input class="btn btn-default" type="submit">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

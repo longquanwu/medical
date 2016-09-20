@@ -28,5 +28,29 @@ class Admin_model extends MY_Model{
         $cond = ['username' => $name];
         return $this->getRowByCond($field, $cond);
     }
+
+    /**
+     * 修改管理员密码
+     * @param $name
+     * @param $password
+     * @return bool
+     */
+    public function modifyPassword($name, $password){
+        $cond = ['username' => $name];
+        $data = ['password' => $password];
+        return $this->updateByCond($cond, $data);
+    }
+
+    /**
+     * 更新用户登录时间
+     * @param $name
+     * @param $time
+     * @return bool
+     */
+    public function updateLoginTime($name, $time){
+        $cond = ['username' => $name];
+        $data = ['last_time' => $time];
+        return $this->updateByCond($cond, $data);
+    }
     
 }

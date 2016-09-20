@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>蘑菇后台</title>
+
+    <link href="/public/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/public/js/jquery.min.js"></script>
+    <script src="/public/dist/js/bootstrap.min.js"></script>
+    <script src="/public/js/docs.min.js"></script>
+
+    <link href="/public/css/admin/dashboard.css" rel="stylesheet">
+    <script src="/public/js/ie-emulation-modes-warning.js"></script>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">蘑菇</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">首页</a></li>
+                <li><a href="/admin/user/modify">修改密码</a></li>
+                <li><a href="/admin/user/logout">退出</a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="/admin/news/index">资讯</a></li>
+                <li><a href="/admin/load/index">引导图</a></li>
+                <li><a href="/admin/banner/index">Banner</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="">病情百科</a></li>
+                <li><a href="">药物百科</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="">普通社区</a></li>
+                <li><a href="">帖子分类</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="">心灵社区</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="">Android</a></li>
+                <li><a href="">IOS</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">修改密码</h1>
+
+            <form class="form-signin" role="form" action="" method="post">
+                <div class="form-group">
+                    <label>原始密码</label>
+                    <input type="password" class="form-control" name="password" placeholder="原始密码" required autofocus>
+
+                    <?php if(isset($passwordError)){ ?>
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        密码错误
+                    </div>
+                    <?php } ?>
+
+                </div>
+                <div class="form-group">
+                    <label>新密码</label>
+                    <input type="password" class="form-control" name="newPassword" placeholder="新密码" required>
+
+                    <?php if(isset($passwordFormatError)){ ?>
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        新密码格式不正确
+                    </div>
+                    <?php } ?>
+
+                </div>
+                <div class="form-group">
+                    <label>确认新密码</label>
+                    <input type="password" class="form-control" name="confirmPassword" placeholder="确认新密码" required>
+
+                    <?php if(isset($passwordConfirmError)){ ?>
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        两次密码不一致
+                    </div>
+                    <?php } ?>
+
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">提交修改</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
