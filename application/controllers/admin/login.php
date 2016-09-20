@@ -18,7 +18,7 @@ class Login extends ADMIN_Controller{
     /** 登录页面 */
     public function index(){
         if ($this->session->user)
-            $this->redirect('/admin/index/home');
+            $this->redirect('/admin/news/index');
         
         if (isset($_POST['submit'])){
             $username = $this->input->post('username', true);
@@ -26,9 +26,10 @@ class Login extends ADMIN_Controller{
             $userInfo = $this->admin_model->getInfoByName($username);
             if ($userInfo && $userInfo['password'] === md5(md5($password) . $userInfo['salt'])){
                 $this->session->user = $username;
+                $this->admin_model->updateLoginTime($username, date('Y-m-d H:i:s'));
                 if (isset($_POST['remember']))
                     $this->session->user = $username;
-                $this->redirect('/admin/index/home');
+                $this->redirect('/admin/news/index');
             }
         }
         
