@@ -69,7 +69,7 @@ class News_model extends MY_Model{
     public function getNews($limit, $offset){
         $field = '*';
         $cond = [];
-        $order = ['status' => 'ASC', 'order' => 'DESC', 'createtime' => 'DESC'];
+        $order = ['delete' => 'ASC', 'order' => 'DESC', 'createtime' => 'DESC'];
         return $this->getAllByCond($field, $cond, $order, $limit, $offset);
     }
 

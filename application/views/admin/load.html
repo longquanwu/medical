@@ -4,16 +4,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="wlq314#qq.com">
     <link rel="icon" href="../../favicon.ico">
 
     <title>蘑菇后台</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="/public/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="/public/js/jquery.min.js"></script>
     <script src="/public/dist/js/bootstrap.min.js"></script>
     <script src="/public/js/docs.min.js"></script>
+
     <link href="/public/css/admin/dashboard.css" rel="stylesheet">
     <script src="/public/js/ie-emulation-modes-warning.js"></script>
 </head>
@@ -44,8 +43,8 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="/admin/news/index">资讯</a></li>
-                <li><a href="/admin/load/index">引导图</a></li>
+                <li><a href="/admin/news/index">资讯</a></li>
+                <li class="active"><a href="/admin/load/index">引导图</a></li>
                 <li><a href="/admin/banner/index">Banner</a></li>
             </ul>
             <ul class="nav nav-sidebar">
@@ -65,39 +64,35 @@
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">资讯列表</h1>
+            <h1 class="page-header">引导图列表</h1>
 
-            <a href="/admin/news/add" class="btn btn-primary btn-xs active" role="button">添加新闻</a>
+            <a href="/admin/load/add" class="btn btn-primary btn-xs active" role="button">添加引导图</a>
 
             <div class="table-responsive">
                 <table class="table table-striped table-hover table-condensed">
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>标题</th>
-                        <th>排序</th>
-                        <th>封面</th>
+                        <th>图片</th>
+                        <th>跳转类型</th>
+                        <th>跳转关联信息</th>
                         <th>最后修改时间</th>
                         <th>操作</th>
                     </tr>
                     </thead>
                     <tbody class="table-striped table-bordered">
                     <?php
-                        foreach($newsList as $value){
+                        foreach($loadList as $value){
                     ?>
-                    <tr class="<?php if($value['delete'] == 1){echo 'success';}else{echo 'warning';} ?>">
+                    <tr>
                         <td><?php echo $value['id']; ?></td>
-                        <td><?php echo $value['title']; ?></td>
-                        <td><?php echo $value['order']; ?></td>
                         <td><img src="<?php echo $value['img']; ?>" width="120" height="80"></td>
-                        <td><?php echo $value['updatetime']; ?></td>
+                        <td><?php echo $value['skip_type']; ?></td>
+                        <td><?php echo $value['skip_info']; ?></td>
+                        <td><?php echo $value['update_time']; ?></td>
                         <td>
-                            <a href="/admin/news/edit/<?php echo $value['id']; ?>" class="btn btn-info btn-xs active" role="button">编辑</a>
-                            <?php if($value['delete'] == 1){ ?>
-                            <a href="/admin/news/delete/<?php echo $value['id']; ?>" class="btn btn-danger btn-xs active" role="button">删除</a>
-                            <?php }else{ ?>
-                            <a href="/admin/news/active/<?php echo $value['id']; ?>" class="btn btn-success btn-xs active" role="button">发布</a>
-                            <?php } ?>
+                            <a href="/admin/load/edit/<?php echo $value['id']; ?>" class="btn btn-info btn-xs active" role="button">编辑</a>
+                            <a href="/admin/load/delete/<?php echo $value['id']; ?>" class="btn btn-danger btn-xs active" role="button">删除</a>
                         </td>
                     </tr>
                     <?php
@@ -110,11 +105,5 @@
     </div>
 </div>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="/public/js/jquery.min.js"></script>
-<script src="/public/dist/js/bootstrap.min.js"></script>
-<script src="/public/js/docs.min.js"></script>
 </body>
 </html>

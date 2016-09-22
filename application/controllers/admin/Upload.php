@@ -16,15 +16,16 @@ class Upload extends ADMIN_Controller{
     /**
      * 上传图片,并生成缩略图,返回缩略图
      * @param bool $thumb  为False 返回原图, True 返回缩略图
+     * @param string $file  文件字段名
      */
-    public function index($thumb = true){
+    public function index($thumb = true, $file = 'file_data'){
         
         $code = -1;
         $msg = '未找到上传的文件';
 
-        if (isset($_FILES['file_data'])){
+        if (isset($_FILES[$file])){
             $this->load->library('upload');
-            if ($this->upload->do_upload('file_data')){
+            if ($this->upload->do_upload($file)){
                 $this->load->library('image_lib');
                 $this->image_lib->source_image = $this->upload->data()['full_path'];
                 $this->image_lib->initialize();
