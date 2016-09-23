@@ -60,10 +60,11 @@ class News extends ADMIN_Controller{
         $content = $this->input->post('content');
         $id = $this->input->post('id');
         if ($id){
+            $this->logger->info("修改新闻 ID:{$id}, title:{$title}, img:{$img}, order:{$order}, content:{$content}");
             $this->news_model->updateNewById($id, $title, $img, $order, $content);
-            
         }else{
-            $this->news_model->addNew($title, $img, $order, $content);
+            $newId = $this->news_model->addNew($title, $img, $order, $content);
+            $this->logger->info("添加新闻 ID:{$newId}, title:{$title}, img:{$img}, order:{$order}, content:{$content}");
         }
         $this->redirect('/admin/news/index');
     }
@@ -73,6 +74,7 @@ class News extends ADMIN_Controller{
      * @param $id
      */
     public function delete($id){
+        $this->logger->info('状态删除新闻 ID:' . $id);
         $this->news_model->deleteNewById($id);
         $this->redirect('/admin/news/index');
     }
@@ -82,6 +84,7 @@ class News extends ADMIN_Controller{
      * @param $id
      */
     public function active($id){
+        $this->logger->info('重新发布新闻 ID:' . $id);
         $this->news_model->activeNewById($id);
         $this->redirect('/admin/news/index');
     }

@@ -92,7 +92,7 @@ class News_model extends MY_Model{
      * @return mixed
      */
     public function deleteNewById($id){
-        $data = ['status' => self::STATUS_DELETE];
+        $data = ['delete' => self::STATUS_DELETE];
         return $this->updateById($id, $data);
     }
 
@@ -102,7 +102,7 @@ class News_model extends MY_Model{
      * @return mixed
      */
     public function activeNewById($id){
-        $data = ['status' => self::STATUS_ACTIVE];
+        $data = ['delete' => self::STATUS_ACTIVE];
         return $this->updateById($id, $data);
     }
 
