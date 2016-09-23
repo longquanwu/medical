@@ -64,12 +64,16 @@ class News_model extends MY_Model{
      * 获得资讯列表
      * @param $limit
      * @param $offset
+     * @param string $keyword
      * @return mixed
      */
-    public function getNews($limit, $offset){
+    public function getNews($limit, $offset, $keyword = ''){
         $field = '*';
         $cond = [];
         $order = ['delete' => 'ASC', 'order' => 'DESC', 'createtime' => 'DESC'];
+        if (!empty($keyword)){
+            return $this->getAllByCond($field, $cond, $order, $limit, $offset, ['title' => $keyword]);
+        }
         return $this->getAllByCond($field, $cond, $order, $limit, $offset);
     }
 
@@ -100,6 +104,18 @@ class News_model extends MY_Model{
     public function activeNewById($id){
         $data = ['status' => self::STATUS_ACTIVE];
         return $this->updateById($id, $data);
+    }
+
+    /**
+     * 根据标题关键字获得记录数
+     * @param null $keyword
+     * @return mixed
+     */
+    public function countAll($keyword = NULL){
+        if (!empty($keyword)){
+            return $this->countByCond([], ['title' => $keyword]);
+        }
+        return $this->countByCond();
     }
     
 }

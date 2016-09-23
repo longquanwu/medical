@@ -23,7 +23,7 @@ abstract class API_Controller extends CI_Controller{
     public function __construct(){
         parent::__construct();
         $this->load->helper('string');
-//        $this->checkDevice();
+        $this->checkDevice();
         $this->load->library('Logger', ['dir' => 'api']);
     }
 
@@ -61,7 +61,7 @@ abstract class API_Controller extends CI_Controller{
             if ($debug == 2) {
                 header("Content-type: text/html; charset=utf-8");
                 echo "<pre>";
-                echo String_helper::formatJson($data);
+                echo string_helper::formatJson($data);
                 echo "</pre>";
                 exit;
             }

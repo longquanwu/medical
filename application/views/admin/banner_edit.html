@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -96,9 +96,9 @@
                     <div class="form-control">
                         <?php if(is_array($skip_type)){foreach($skip_type as $k => $v){
                         if(!empty($bannerInfo['skip_type']) && $bannerInfo['skip_type'] == $k){
-                        echo "<input type='radio' value={$k} name='skipType' checked='checked'>$v";
+                        echo "<label class='radio-inline'><input type='radio' value={$k} name='skipType' checked='checked'>$v</label>";
                         }else{
-                        echo "<input type='radio' value={$k} name='skipType'>$v";
+                        echo "<label class="radio-inline"><input type='radio' value={$k} name='skipType'>$v</label>";
                         }
                         }} ?>
                     </div>

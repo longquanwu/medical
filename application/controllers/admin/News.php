@@ -17,10 +17,21 @@ class News extends ADMIN_Controller{
 
     /**
      * 资讯列表
-     * TODO 分页,分条件查询
+     * @param int $page  分页
      */
-    public function index(){
-        $data['newsList'] = $this->news_model->getNews(0, 9999999);
+    public function index($page = 1){
+        $keyword = empty($_GET['keyword']) ? NULL : $_GET['keyword'];
+        if (!empty($_POST['search'])){
+            $page = 1;
+            $keyword = $_POST['keyword'];
+        }
+        
+        $pageSize = 10;
+        $this->load->helper('paging');
+        $count = $this->news_model->countAll($keyword);
+        $data['pageString'] = paging_helper::run('/admin/news/index/{page}?keyword=' . $keyword, $count, $page, $pageSize);
+        $begin = ($page - 1) * $pageSize;
+        $data['newsList'] = $this->news_model->getNews($begin, $pageSize, $keyword);
         $this->load->view('admin/news.html', $data);
     }
 

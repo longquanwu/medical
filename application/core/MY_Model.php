@@ -200,14 +200,20 @@ abstract class MY_Model extends CI_Model{
     /**
      * 根据条件统计数据条数
      * @param array $cond  查询条件,默认不传表示查询所有数据数目
-     * @return int
+     * @param array $keyword  模糊查询条件
+     * @return mixed
      */
-    protected function countByCond(array $cond = []){
+    protected function countByCond(array $cond = [], array $keyword = []){
         if (!empty($this->_primary))
             $this->sdb->select($this->_primary);
         $this->sdb->from($this->_table);
         if (!empty($cond)){
             $this->sdb->where($cond);
+        }
+        if (!empty($keyword) && is_array($keyword)){
+            foreach ($keyword as $k => $v){
+                $this->sdb->like($k, $v, 'both');
+            }
         }
         return $this->sdb->count_all_results();
     }

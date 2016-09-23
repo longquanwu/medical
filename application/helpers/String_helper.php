@@ -1,11 +1,11 @@
 <?php
 /**
- * String_helper.php
+ * string_helper.php
  * User: wlq314@qq.com
  * Date: 16/9/7 Time: 16:58
  */
 
-class String_helper{
+class string_helper{
 
     /**
      * 格式化JSON串,并且按特定格式排列
