@@ -25,11 +25,12 @@ class News extends ADMIN_Controller{
             $page = 1;
             $keyword = $_POST['keyword'];
         }
-        
         $pageSize = 10;
+        
         $this->load->helper('paging');
         $count = $this->news_model->countAll($keyword);
         $data['pageString'] = paging_helper::run('/admin/news/index/{page}?keyword=' . $keyword, $count, $page, $pageSize);
+        
         $begin = ($page - 1) * $pageSize;
         $data['newsList'] = $this->news_model->getNews($begin, $pageSize, $keyword);
         $this->load->view('admin/news.html', $data);

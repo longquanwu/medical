@@ -307,7 +307,7 @@ switch (ENVIRONMENT)
 
 	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
 
-define('UPLOAD_URL', 'http://rs.aqingstudy.com');
+define('UPLOAD_URL', 'https://api.aqingstudy.com');
 define('UPLOAD_PATH', '/data/www/uploads');
 
 /*

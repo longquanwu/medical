@@ -23,7 +23,7 @@ abstract class API_Controller extends CI_Controller{
     public function __construct(){
         parent::__construct();
         $this->load->helper('string');
-        $this->checkDevice();
+//        $this->checkDevice();
         $this->load->library('Logger', ['dir' => 'api']);
     }
 

@@ -32,7 +32,7 @@
                 }
             });
             function sendFile(file) {
-                data = new FormData();
+                var data = new FormData();
                 data.append("file_data", file);
                 $.ajax({
                     data: data,
@@ -98,13 +98,13 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="/admin/news/index">资讯</a></li>
+                <li><a href="/admin/news/index">资讯</a></li>
                 <li><a href="/admin/load/index">引导图</a></li>
                 <li><a href="/admin/banner/index">Banner</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a href="/admin/disease/index">病情百科</a></li>
-                <li><a href="/admin/medicine/index">药物百科</a></li>
+                <li class="active"><a href="/admin/medicine/index">药物百科</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a href="/admin/community/index">普通社区</a></li>
@@ -119,30 +119,26 @@
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header"><?php if(isset($newInfo['id'])){echo "修改资讯 ID:{$newInfo['id']}";}else{echo "添加资讯";} ?></h1>
-            <form method="post" action="/admin/news/save">
+            <h1 class="page-header"><?php if(isset($info['id'])){echo "修改药物 ID:{$info['id']}";}else{echo "添加药物";} ?></h1>
+            <form method="post" action="/admin/medicine/save">
 
                 <div class="form-group">
-                    <label for="title">新闻标题</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="新闻标题" <?php if(isset($newInfo['title'])){echo "value='{$newInfo['title']}'";} ?> required>
-                </div>
-                <div class="form-group">
-                    <label for="order">排序值</label>
-                    <input type="text" class="form-control" id="order" name="order" placeholder="排序值" <?php if(isset($newInfo['order'])){echo "value='{$newInfo['order']}'";} ?> required>
+                    <label for="title">名称</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="药物名称" <?php if(isset($info['title'])){echo "value='{$info['title']}'";} ?> required>
                 </div>
                 <div class="form-group">
                     <label for="img">封面图片</label></br>
-                    <img src="<?php if(isset($newInfo['title'])){echo $newInfo['img'];} ?>" width="140" height="140" class="img-thumbnail">
+                    <img src="<?php if(isset($info['title'])){echo $info['img'];} ?>" width="140" height="140" class="img-thumbnail">
                     <input id="img" type="file" class="file" data-preview-file-type="text">
                 </div>
                 <div class="form-group">
-                    <label for="img">新闻内容</label>
-                    <textarea id="summernote" name="content" required><?php if(isset($newInfo['content'])){echo $newInfo['content'];} ?></textarea>
+                    <label for="img">详细描述</label>
+                    <textarea id="summernote" name="content" required><?php if(isset($info['content'])){echo $info['content'];} ?></textarea>
                 </div>
                 <div class="form-group">
-                    <input type="hidden" name="img" id="img-thumbnail" <?php if(isset($newInfo['img'])){echo "value='{$newInfo['img']}'";} ?>>
-                    <?php if(isset($newInfo['id'])){ ?>
-                    <input type="hidden" name="id" value="<?php echo $newInfo['id']; ?>">
+                    <input type="hidden" name="img" id="img-thumbnail" <?php if(isset($info['img'])){echo "value='{$info['img']}'";} ?>>
+                    <?php if(isset($info['id'])){ ?>
+                        <input type="hidden" name="id" value="<?php echo $info['id']; ?>">
                     <?php } ?>
                     <input class="btn btn-default" type="submit">
                 </div>
