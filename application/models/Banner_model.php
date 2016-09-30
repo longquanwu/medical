@@ -1,5 +1,7 @@
 <?php
 /**
+ * Load图 和 Banner图 
+ * 
  * Banner_model.php
  * User: wlq314@qq.com
  * Date: 16/9/21 Time: 14:42
@@ -7,10 +9,16 @@
 
 class Banner_model extends MY_Model{
     
+    /** Banner TYPE 值为1 */
     const TYPE_BANNER = 1;
+
+    /** Load TYPE 值为1 */
     const TYPE_LOAD = 2;
     
+    /** 正常状态 */
     const ACTIVE_TYPE = 1;
+    
+    /** 逻辑删除状态 */
     const DELETE_TYPE = 2;
 
     protected function setTableName(){
@@ -23,6 +31,7 @@ class Banner_model extends MY_Model{
 
     /**
      * 添加Load
+     * 
      * @param $img
      * @param $skip_type
      * @param $skip_info
@@ -40,6 +49,7 @@ class Banner_model extends MY_Model{
 
     /**
      * 添加Banner
+     * 
      * @param $img
      * @param $skip_type
      * @param $skip_info
@@ -57,6 +67,7 @@ class Banner_model extends MY_Model{
 
     /**
      * 获得Banner列表
+     * 
      * @return mixed
      */
     public function bannerList(){
@@ -68,6 +79,7 @@ class Banner_model extends MY_Model{
 
     /**
      * 获得Load列表
+     * 
      * @return mixed
      */
     public function loadList(){
@@ -79,6 +91,7 @@ class Banner_model extends MY_Model{
 
     /**
      * 根据ID获得Banner或Load的信息
+     * 
      * @param $id
      * @return array|bool
      */
@@ -88,6 +101,7 @@ class Banner_model extends MY_Model{
 
     /**
      * 修改信息
+     * 
      * @param $id
      * @param $img  图片地址
      * @param $skipType  跳转类型
@@ -105,6 +119,7 @@ class Banner_model extends MY_Model{
 
     /**
      * 根据ID删除对应Banner或Load  逻辑删除
+     * 
      * @param $id
      * @return mixed
      */
